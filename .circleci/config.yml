@@ -18,7 +18,7 @@ jobs:
             go build -o e2ekindprototype .
 
       - run: |
-          sudo ./project/e2ekindprototype
+          sudo /home/circleci/project/e2ekindprototype
 
       - store_artifacts:
           path: /home/circleci/logs
