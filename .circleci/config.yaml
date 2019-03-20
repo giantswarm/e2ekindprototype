@@ -1,0 +1,26 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: quay.io/giantswarm/golang:1.11.3
+    working_directory: /workdir
+    steps:
+      - checkout
+      - attach_workspace:
+          at: .
+      - restore_cache:
+          keys:
+            - go-mod-v1-{{ checksum "go.sum" }}
+      - run: |
+          CGO_ENABLED=0 go build -ldflags "-w -linkmode 'auto' -extldflags '-static'" -o e2ekindprototype .
+      - save_cache:
+          key: go-mod-v1-{{ checksum "go.sum" }}
+          paths:
+            - "/go/pkg/mod"
+      - run: |
+          ./e2ekindprototype
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./e2ekindprototype
