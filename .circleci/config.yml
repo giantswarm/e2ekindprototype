@@ -2,12 +2,10 @@ version: 2
 
 jobs:
   build:
-    docker:
-      - image: quay.io/giantswarm/golang:1.11.3
+    machine: true
     working_directory: /workdir
     steps:
       - checkout
-      - setup_remote_docker
 
       - attach_workspace:
           at: .
