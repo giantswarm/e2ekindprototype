@@ -21,8 +21,6 @@ jobs:
           paths:
             - "/go/pkg/mod"
       - run: |
-          apt-get update && apt-get install -y docker
-      - run: |
           ./e2ekindprototype
       - persist_to_workspace:
           root: .
