@@ -7,9 +7,7 @@ jobs:
     working_directory: /workdir
     steps:
       - checkout
-
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - setup_remote_docker
 
       - attach_workspace:
           at: .
@@ -22,6 +20,8 @@ jobs:
           key: go-mod-v1-{{ checksum "go.sum" }}
           paths:
             - "/go/pkg/mod"
+      - run: |
+          apt-get update && apt-get install -y docker
       - run: |
           ./e2ekindprototype
       - persist_to_workspace:
