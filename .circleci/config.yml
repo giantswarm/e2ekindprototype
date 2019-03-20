@@ -6,6 +6,9 @@ jobs:
 
     steps:
       - checkout
+      
+      - run: |
+          mkdir /home/circleci/logs
 
       - run: |
           docker run -e GO111MODULE=on \
@@ -15,4 +18,8 @@ jobs:
             go build -o e2ekindprototype .
 
       - run: |
-          ./project/e2ekindprototype
+          /home/circleci/project/e2ekindprototype
+
+      - store_artifacts:
+        path: /home/circleci/logs
+        destination: logs

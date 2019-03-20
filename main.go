@@ -26,5 +26,10 @@ func mainWithError() (err error) {
 		return microerror.Mask(err)
 	}
 
+	err = ctx.CollectLogs("/home/circleci/logs")
+	if err != nil {
+		return microerror.Mask(err)
+	}
+
 	return nil
 }
