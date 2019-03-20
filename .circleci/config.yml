@@ -9,18 +9,9 @@ jobs:
 
       - attach_workspace:
           at: .
-      - restore_cache:
-          keys:
-            - go-mod-v1-{{ checksum "go.sum" }}
+
       - run: |
-          CGO_ENABLED=0 go build -ldflags "-w -linkmode 'auto' -extldflags '-static'" -o e2ekindprototype .
-      - save_cache:
-          key: go-mod-v1-{{ checksum "go.sum" }}
-          paths:
-            - "/go/pkg/mod"
+          go build -o e2ekindprototype
+
       - run: |
           ./e2ekindprototype
-      - persist_to_workspace:
-          root: .
-          paths:
-            - ./e2ekindprototype
