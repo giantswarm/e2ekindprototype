@@ -3,15 +3,12 @@ version: 2
 jobs:
   build:
     machine: true
-    working_directory: /workdir
+
     steps:
       - checkout
 
-      - attach_workspace:
-          at: .
-
       - run: |
-          go build -o e2ekindprototype
+          go build -o e2ekindprototype .
 
       - run: |
           ./e2ekindprototype
